@@ -2,12 +2,13 @@
   "name": "glizzy-g.neocities.org",
   "version": "1.0.0",
   "description": "Say it don't spray it",
-  "keywords": [
-    "web"
-  ],
+  "homepage": "https://github.com/glizzy-g/glizzy-g.neocities.org#readme",
+  "bugs": {
+    "url": "https://github.com/glizzy-g/glizzy-g.neocities.org/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "I'll get to it"
+    "url": "git+https://github.com/glizzy-g/glizzy-g.neocities.org.git"
   },
   "license": "GPL-3.0-only",
   "author": "glizzy-g",
