@@ -1,23 +1,56 @@
 body{
-    margin: 0px;
-    overflow-x:hidden;
     background-color: black;
+    font-family: monospace;
+    font-size: 1rem;
+
+    margin:0px;
+    
+    overflow-x:hidden;
 }
 
-.Card{
-    background-color: greenyellow;
-    height: 1000px;
-    padding: 50px;
-    width: 45%;
-    border-radius: 50px;
+#Background{
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+}
+
+#Content{
+    background-color: black;
+
     left: 27.5%;
     top: 50px;
+    
+    width: 45vw;
+    height: fit-content;
+    padding: 2.25vw;
+    border-radius: 2.25vw;
+
     position: absolute;
     box-sizing: border-box;
 }
 
-#Background{
-    width: 100%;
-    height: 100%;
-    position: fixed;
+#Header{
+    display: flex;
+}
+
+#Title{
+    display: inline;
+}
+
+#HeaderButtons{
+    margin-left: auto;
+}
+
+#More::part(button){
+    font-size: 2.25rem;
+    font-weight: bolder;
+    cursor: pointer;
+    
+    border:none;
+    background: none;
+}
+
+#NewsBanner{
+    font-size:1rem;
 }
