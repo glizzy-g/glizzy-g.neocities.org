@@ -1,21 +1,26 @@
+/**
+ * @author Glizzy G <gliccy.g@outlook.com>
+ * @copyright Glizzy G 2025. Freely under GPLv3.
+ * 
+ */
 import Color from 'color';
 import { createNoise2D } from 'simplex-noise';
 import { BiColourNoise } from "./Background/Backgrounds.js";
 import DropdownButton from "./Elements/DropdownButton.js";
 import ScrollingBanner from './Elements/ScrollingBanner.js';
 
-const primaryColour = Color.hsl(Math.random()*360, 70+Math.random()*30-30, 45+Math.random()*30);
-const secondaryColour = primaryColour.darken(0.35);
+customElements.define("dropdown-button", DropdownButton);
+customElements.define("scrolling-banner", ScrollingBanner);
 
 const noise2D = createNoise2D();
-const GenerateNoise = function (x, y, s=1, e=1, normalise=false){
-    let noise = noise2D(x/s, y/s);
+const GenerateNoise = function (x, y, s = 1, e = 1, normalise = false) {
+    let noise = noise2D(x / s, y / s);
 
     noise++;
     noise /= 2;
     noise = Math.pow(noise, e);
 
-    if(!normalise){
+    if (!normalise) {
         noise << 1;
         noise--;
     }
@@ -23,26 +28,25 @@ const GenerateNoise = function (x, y, s=1, e=1, normalise=false){
     return noise;
 }
 
-const canvas = document.getElementById("Background");
-
-BiColourNoise(canvas, GenerateNoise, secondaryColour, Color('black'), 50, 15);
+const primaryColour = Color.hsl(Math.random() * 360, 70 + Math.random() * 30 - 30, 45 + Math.random() * 30);
+const secondaryColour = primaryColour.darken(0.35);
 
 document.getElementById("Content").style.backgroundColor = primaryColour.hsl().string();
 
-customElements.define("dropdown-button", DropdownButton);
-
+// "More" Dropdown Button
 const more = document.getElementById("More");
+more.dropdown.style.backgroundColor = primaryColour.hsl().string();
 
-more.button.addEventListener("click", function(e){
-    if(more.dropdownEnabled){
+more.button.addEventListener("click", function (e) {
+    if (more.dropdownEnabled) {
         more.button.textContent = "☷";
-    }else{
+    } else {
         more.button.textContent = "☰";
     }
 });
 
-const moreOptions = [{text:"Settings",href:"settings.html"}];
-for(let i=0; i<moreOptions.length; i++){
+const moreOptions = [{ text: "Settings", href: "settings.html" }];
+for (let i = 0; i < moreOptions.length; i++) {
     var a = document.createElement("a");
 
     a.textContent = moreOptions[i].text;
@@ -51,6 +55,22 @@ for(let i=0; i<moreOptions.length; i++){
     more.dropdown.appendChild(a);
 }
 
-more.dropdown.style.backgroundColor = primaryColour.hsl().string();
+// News Banner
+const news = document.getElementById("NewsBanner");
+news.displayElements = ["Hello, world!", "I love penis!"];
+news.scrollRate = 40;
 
-customElements.define("scrolling-banner", ScrollingBanner);
+// Background canvas
+const canvas = document.getElementById("Background");
+BiColourNoise(canvas, GenerateNoise, secondaryColour, Color('black'), 50, 15);
+
+// Animation updates
+let lastUpdate = Date.now();
+setInterval(() => {
+    let now = Date.now();
+    let deltaTime = (now - lastUpdate)/1000;
+
+    news.update(deltaTime);
+
+    lastUpdate = now;
+}, 20);

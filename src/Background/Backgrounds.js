@@ -1,3 +1,9 @@
+/**
+ * @author Glizzy G <gliccy.g@outlook.com>
+ * @copyright Glizzy G 2025. Freely under GPLv3.
+ * 
+ */
+
 import Color from 'color';
 
 export function BiColourNoise(canvas, noise, peak, trough, scale, exponent){
