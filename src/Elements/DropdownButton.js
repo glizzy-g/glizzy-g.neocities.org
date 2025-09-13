@@ -1,3 +1,9 @@
+/**
+ * @author Glizzy G <gliccy.g@outlook.com>
+ * @copyright Glizzy G 2025. Freely under GPLv3.
+ * 
+ */
+
 class DropdownButton extends HTMLElement{
     constructor(){
         super();
@@ -18,7 +24,7 @@ class DropdownButton extends HTMLElement{
 
         this.button.textContent = this.textContent;
 
-        this.dropdown.style.cssText = "position:absolute;border-radius:3px;border:solid 2px black;visibility:hidden;padding:4px;";
+        this.dropdown.style.cssText = "position:absolute;border-radius:3px;border:solid 2px black;visibility:hidden;padding:4px;z-index:1";
 
         this.button.addEventListener("click", (e)=>{
             this.dropdownEnabled = !this.dropdownEnabled;

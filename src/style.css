@@ -1,26 +1,26 @@
-body{
+body {
     background-color: black;
     font-family: monospace;
     font-size: 1rem;
 
-    margin:0px;
-    
-    overflow-x:hidden;
+    margin: 0px;
+
+    overflow-x: hidden;
 }
 
-#Background{
+#Background {
     width: 100vw;
     height: 100vh;
 
     position: fixed;
 }
 
-#Content{
+#Content {
     background-color: black;
 
     left: 27.5%;
     top: 50px;
-    
+
     width: 45vw;
     height: fit-content;
     padding: 2.25vw;
@@ -30,27 +30,28 @@ body{
     box-sizing: border-box;
 }
 
-#Header{
+#Header {
     display: flex;
 }
 
-#Title{
+#Title {
     display: inline;
 }
 
-#HeaderButtons{
+#HeaderButtons {
     margin-left: auto;
 }
 
-#More::part(button){
-    font-size: 2.25rem;
+#More::part(button) {
+    font-size: 2rem;
     font-weight: bolder;
     cursor: pointer;
-    
-    border:none;
+
+    border: none;
+    padding: 0px;
     background: none;
 }
 
-#NewsBanner{
-    font-size:1rem;
+#NewsBanner {
+    font-size: 1rem;
 }

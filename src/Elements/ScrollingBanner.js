@@ -1,37 +1,81 @@
-class ScrollingBanner extends HTMLElement{
-    constructor(){
+/**
+ * @author Glizzy G <gliccy.g@outlook.com>
+ * @copyright Glizzy G 2025. Freely under GPLv3.
+ * 
+ */
+
+
+/**
+ * Replacement for <marquee>
+ *
+ * @class ScrollingBanner
+ * @typedef {ScrollingBanner}
+ * @extends {HTMLElement}
+ */
+class ScrollingBanner extends HTMLElement {
+
+    /**
+     * Creates an instance of ScrollingBanner.
+     *
+     * @constructor
+     */
+    constructor() {
         super();
 
-        this.display;
-        this.text;
+        /**
+         * @member {number} scrollPosition - Tracks distance scrolled
+         * @private
+         */
+        this.scrollPosition = 0.0;
+        /**
+         * @member {number} scrollRate - Rate at which the display should scroll.
+         */
+        this.scrollRate = 1.0;
 
-        this.displayPosition;
+        this.displayElements = [""];
+        this.currentElementIndex = 0;
+
+        this.bezel;
+        this.display;
     }
 
-    connectedCallback(){
-        this.style.display = "flex";
+    connectedCallback() {
+        // Border around moving text to hide overflow
+        this.bezel = document.createElement("div");
+        this.bezel.style.overflow = "hidden";
 
-        this.text = "ASDF";
-
-        this.displayPosition = 0;
-
-        const shadow = this.attachShadow({mode:"open"});
-
+        // Creates a span for each item in the list
         this.display = document.createElement("span");
+        this.display.style.position = "relative";
+        this.display.style.left = this.scrollPosition.toString() + "px";
+        this.display.style.whiteSpace = "preserve nowrap"
 
-        this.display.style.position = "absolute";
+        this.display.textContent = this.displayElements[this.currentElementIndex];
 
-        this.display.innerText = this.text;
+        // Attach to DOM
+        this.bezel.appendChild(this.display);
+        this.appendChild(this.bezel);
+    }
 
-        shadow.appendChild(this.display);
+    update(factor = 1) {
+        this.scrollPosition -= (this.scrollRate * factor);
 
-        setInterval(() => {
-            this.displayPosition -= 1;
-            this.display.style.left = toString(this.displayPosition)+"px";
-            if(this.display.clientLeft<(0-this.display.clientWidth)){
-                this.display.clientLeft = this.clientWidth-this.display.clientWidth;
-            }
-        }, 1);
+        if (this.scrollPosition < 0 - this.display.offsetWidth) {
+            this.display.style.left = "100%";
+            this.scrollPosition = this.bezel.clientWidth;
+            this.nextElement();
+        } else {
+            this.display.style.left = this.scrollPosition.toString() + "px";
+        }
+    }
+
+    nextElement() {
+        if (this.currentElementIndex == this.displayElements.length - 1) {
+            this.currentElementIndex = 0;
+        } else {
+            this.currentElementIndex++;
+        }
+        this.display.textContent = this.displayElements[this.currentElementIndex];
     }
 }
 
